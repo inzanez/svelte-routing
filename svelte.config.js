@@ -17,12 +17,7 @@ const config = {
 			// default options are shown
 			out: 'build',
 			precompress: true,
-			env: {
-				host: '0.0.0.0',
-				port: '8080'
-			}
 		}),
-		// Relative to 'assets' path below! Importante:-)
 		appDir: '_app',
 		paths: {
 			base: '/base/path'
