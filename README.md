@@ -18,7 +18,7 @@ The project just has two routes:
 
 In `svelte.config.js`, the `paths.base` is set to `/base/path`.
 
-There are three things to test:
+There are three (or rather four) things to test:
 
 1. Run in `dev` mode and access pages
 2. Run the build without a proxy
@@ -28,27 +28,18 @@ There are three things to test:
 
 `npm run dev`
 
-* Visiting `http://localhost:3000/` will result in a `404 not found`.
-I would assume that this is because of the `paths.base`
-* Visiting `http://localhost:3000/base/path` does work
-* Visiting `http://localhost:3000/base/path/sub/welcome` does work
+* Visiting `http://localhost:5173/` redirects to `http://localhost:5173/base/path`
+and serves the index page
+* Visiting `http://localhost:5173/base/path/sub/welcome` does work
 
 ### Case 2
 
 `node build`
 
-* Visiting `http://localhost:3000/` does return the main document, but gets
-many `404` for static assets (javascript and css content). This is because
-these URLs got the `paths.base` prepended but it seems that they are still
-just served from the root `/`
-* `404`
-* `404`
+* Visiting `http://localhost:3000/base/path` does work
+* Visiting `http://localhost:3000/base/path/sub/welcome` does work
 
 ### Case 3
-
-From the two above I gather that things are served from `/` but the `paths.base`
-gets prepended to static assets. Therefore using the following `haproxy` config
-should work:
 
 ```
 global
@@ -72,9 +63,9 @@ Again, start the node server:
 
 `node build`
 
-and now browse port `8888` instead of `3000` (please be aware that the `/`
-should not be browsed with this rev-proxy config, I am aware of the loop):
+and now browse port `8888` instead of `3000`:
 
-* Visiting `http://localhost:8888/base/path` does work perfectly
-* Visiting `http://localhost:3000/base/path/sub/welcome` does work perfectly
+* Visiting `http://localhost:8888/base/path` results in `404`
+* Visiting `http://localhost:3000/base/path/sub/welcome` results in `404`
 
+**Turning off the `replace-path` instruction will make it work again.**
