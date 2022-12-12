@@ -41,8 +41,8 @@ I would assume that this is because of the `paths.base`
 many `404` for static assets (javascript and css content). This is because
 these URLs got the `paths.base` prepended but it seems that they are still
 just served from the root `/`
-* `404`
-* `404`
+* Visiting `http://localhost:3000/base/path` does `404`
+* Visiting `http://localhost:3000/base/path/sub/welcome` does `404`
 
 ### Case 3
 
