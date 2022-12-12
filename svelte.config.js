@@ -11,7 +11,7 @@ const config = {
 		}),
 		appDir: '_app',
 		paths: {
-			base: ''
+			base: '/base/path'
 		}
 	}
 };
